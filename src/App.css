@@ -28,11 +28,39 @@
   color: #61dafb;
 }
 
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.btn {
+  border-radius: 5px;
+  height: 2rem;
+  width: 4rem;
+  outline: none;
+  border: none;
+  box-shadow: 2px 2px 2px hsl(127, 45%, 23%);
+}
+
+.btn-primary {
+  background-color: #61fb73;
+}
+
+button:hover {
+  box-shadow: 5px 5px 5px hsl(127, 45%, 23%);
+}
+
+button:active {
+  transform: scale(0.9);
+}
+
+.red {
+  color: red;
 }
