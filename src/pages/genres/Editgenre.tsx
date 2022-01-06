@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import GenreForm from './GenreForm';
+import GenreForm from '../../forms/genre/GenreForm';
 
 export default function Editgenre() {
     const { id }: any = useParams();

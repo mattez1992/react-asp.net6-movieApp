@@ -1,4 +1,4 @@
-import GenreForm from "./GenreForm";
+import GenreForm from "../../forms/genre/GenreForm";
 
 export default function Creategenre() {
     return (

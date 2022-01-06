@@ -1,7 +1,7 @@
 import { Form, Formik, FormikHelpers } from 'formik';
 import React from 'react'
 import { Link } from 'react-router-dom';
-import TextField from '../../forms/TextField';
+import TextField from '../formFields/TextField';
 import Button from '../../utils/Button';
 import * as Yup from "yup";
 import { genreCreationDTO } from '../../models/genres/genres.model';
