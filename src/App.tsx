@@ -20,6 +20,11 @@ function App() {
         </Switch>
 
       </div>
+      <footer className="bd-footer py-5 mt5 bg-light">
+        <div className="container">
+          React Movie App {new Date().getFullYear().toString()}
+        </div>
+      </footer>
     </BrowserRouter>
 
   );

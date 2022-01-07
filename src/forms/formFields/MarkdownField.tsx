@@ -7,9 +7,9 @@ export default function MarkdownField(props: markdownFieldProps) {
     return (
         <div className="mb-3 form-markdown">
             <div>
-                <label>{props.field}</label>
+                <label>{props.displayName}</label>
                 <div>
-                    <Field name={props.field} type="textarea" className="form-textarea" />
+                    <Field name={props.field} component="textarea" className="form-textarea" />
                 </div>
             </div>
             <div>
