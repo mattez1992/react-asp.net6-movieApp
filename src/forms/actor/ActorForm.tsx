@@ -7,6 +7,7 @@ import TextField from '../formFields/TextField'
 import * as Yup from "yup";
 import DateField from '../formFields/DateField'
 import ImageField from '../formFields/ImageField'
+import MarkdownField from '../formFields/MarkdownField'
 
 export default function ActorForm(props: actorFormProps) {
     return (
@@ -26,7 +27,7 @@ export default function ActorForm(props: actorFormProps) {
                         field='picture'
                         imageURL={props.model.pictureURL}
                     />
-
+                    <MarkdownField displayName='Biography' field="biography" />
                     <div className="mt-2 d-flex justify-content-between">
                         <Button disabled={formikProps.isSubmitting} type="submit">Submit</Button>
                         <Link to="/actors" className='btn btn-secondary'>Cancel</Link>
