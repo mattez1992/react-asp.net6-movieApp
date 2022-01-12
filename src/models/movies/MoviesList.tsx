@@ -2,7 +2,6 @@ import React from 'react'
 import MovieItem from './MovieItem'
 import { movieDTO } from './movies.model'
 import css from "./MoviesListCSS.module.css";
-import Loading from '../../utils/Loading';
 import DisplayGenericList from '../../utils/DisplayGenericList';
 export default function MoviesList(props: moviesListProps) {
 

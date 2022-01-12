@@ -10,7 +10,7 @@ import ImageField from '../formFields/ImageField';
 import CheckboxField from '../formFields/CheckboxField';
 import MultipleSelectorField, { multipleSelectorModel } from '../formFields/MultipleSelectorField';
 import { genreDTO } from '../../models/genres/genres.model';
-import { movieTheaterCreateDTO, movieTheaterDTO } from '../../models/movieTheater/movieTheater.model';
+import { movieTheaterDTO } from '../../models/movieTheater/movieTheater.model';
 import TypeAheadActors from '../actor/TypeAheadActors';
 import { actorMovieDTO } from '../../models/actor/actor.model';
 
