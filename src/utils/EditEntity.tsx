@@ -21,7 +21,17 @@ export default function EditEntity<CreateDTO, ReadDTO>(props: editEntityProps<Cr
 
     async function edit(entityToEdit: CreateDTO) {
         try {
-            await axios.put(`${props.apiURL}/${id}`, entityToEdit)
+            if (props.transformFormData) {
+                const formData = props.transformFormData(entityToEdit);
+                await axios({
+                    method: "put",
+                    url: `${props.apiURL}/${id}`,
+                    data: formData,
+                    headers: { "Content-Type": "multipart/form-data" }
+                })
+            } else {
+                await axios.put(`${props.apiURL}/${id}`, entityToEdit)
+            }
             history.push(props.historyURL);
         }
         catch (err) {
@@ -45,6 +55,7 @@ interface editEntityProps<CreateDTO, ReadDTO> {
     apiURL: string,
     historyURL: string,
     transformReadToCreate(entity: ReadDTO): CreateDTO,
+    transformFormData?(model: CreateDTO): FormData,
     children(entity: CreateDTO, edit: (entity: CreateDTO) => void): ReactElement,
 
 }

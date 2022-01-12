@@ -1,16 +1,37 @@
 import React from 'react'
 import ActorForm from '../../forms/actor/ActorForm'
+import { actorCreateDTO, actorReadDTO } from '../../models/actor/actor.model';
+import { converActorToFormData } from '../../utils/convertActorToFormData';
+import EditEntity from '../../utils/EditEntity';
+import { urlActors } from '../../utils/endpoints';
 
 export default function EditActor() {
+
+    function transform(actor: actorReadDTO): actorCreateDTO {
+        return {
+            name: actor.name,
+            pictureURL: actor.picture,
+            biography: actor.biography,
+            dateOfBirth: new Date(actor.dateOfBirth!)
+        }
+    }
+
     return (
         <div>
-            <h3>Edit Actor</h3>
-            <ActorForm model={{ name: "Tom Holland", dateOfBirth: new Date("1996-06-01T00:00:00"), pictureURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Tom_Holland_by_Gage_Skidmore.jpg/250px-Tom_Holland_by_Gage_Skidmore.jpg" }}
-                onSubmit={async value => {
-                    // when the form is posted
-                    await new Promise(r => setTimeout(r, 2000));
-                    console.log(value)
-                }} />
+            <EditEntity<actorCreateDTO, actorReadDTO>
+                entityName="Actor"
+                apiURL={urlActors}
+                historyURL='/actors'
+                transformFormData={converActorToFormData}
+                transformReadToCreate={transform}
+            >
+                {(entity, edit) =>
+                    <ActorForm model={entity}
+                        onSubmit={async entityToEdit => {
+                            // when the form is posted
+                            await edit(entityToEdit);
+                        }} />}
+            </EditEntity>
         </div>
     )
 }
