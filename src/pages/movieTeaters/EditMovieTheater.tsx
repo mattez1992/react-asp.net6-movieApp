@@ -1,23 +1,17 @@
 import React from 'react'
 import MovieTheaterForm from '../../forms/movieTheater/MovieTheaterForm';
+import { movieTheaterCreateDTO, movieTheaterDTO } from '../../models/movieTheater/movieTheater.model';
+import EditEntity from '../../utils/EditEntity';
+import { urlMovieTheaters } from '../../utils/endpoints';
 
 export default function EditMovieTheater() {
     return (
-        <div>
-            <h3>Edit Movie Theater</h3>
-            <MovieTheaterForm
-                model={{
-                    name: "Nordisk Film Uppsala",
-                    latitude: 59.87556831725519,
-                    longitude: 17.675199779193516,
-                }}
+        <EditEntity<movieTheaterCreateDTO, movieTheaterDTO>
+            entityName='Movie Theater'
+            apiURL={urlMovieTheaters}
+            historyURL="/movietheaters">
+            {(theaterToEdit, edit) => <MovieTheaterForm model={theaterToEdit} onSubmit={async theaterToEdit => await edit(theaterToEdit)} />}
+        </EditEntity>
 
-                onSubmit={async value => {
-                    // when the form is posted
-                    await new Promise(r => setTimeout(r, 2000));
-                    console.log(value)
-                }}
-            />
-        </div>
     )
 }

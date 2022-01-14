@@ -19,10 +19,6 @@ export default function IndexEntity<T>(props: IndexProps<T>) {
     // set pages and recordsPerPage as dependency so it reruns when they change.
     useEffect(() => {
         loadData();
-        console.log(totalAmountOfPages)
-        console.log(recordsPerPage)
-
-        console.log(page)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page, recordsPerPage])
 

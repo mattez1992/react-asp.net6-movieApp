@@ -15,8 +15,13 @@ export interface actorCreateDTO {
 }
 
 export interface actorMovieDTO {
-    id: number;
-    name: string;
-    movieCharacter: string;
-    picture: string;
+    id?: number;
+    name?: string;
+    movieCharacter?: string;
+    picture?: string;
+}
+
+export interface movieActorDto {
+    actorId?: number;
+    character?: string;
 }

@@ -3,3 +3,7 @@ export const urlGenres = `${baseURL}/genre`
 export const urlGenrePagnation = `${baseURL}/genre/pages`
 
 export const urlActors = `${baseURL}/actor`
+
+export const urlMovieTheaters = `${baseURL}/movietheaters`
+
+export const urlMovies = `${baseURL}/movies`

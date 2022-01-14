@@ -1,7 +1,7 @@
 import React from 'react'
 import ActorForm from '../../forms/actor/ActorForm'
 import { actorCreateDTO, actorReadDTO } from '../../models/actor/actor.model';
-import { converActorToFormData } from '../../utils/convertActorToFormData';
+import { converActorToFormData } from '../../utils/formDataConverters';
 import EditEntity from '../../utils/EditEntity';
 import { urlActors } from '../../utils/endpoints';
 

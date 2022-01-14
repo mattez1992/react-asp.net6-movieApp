@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import ActorForm from '../../forms/actor/ActorForm'
 import { actorCreateDTO } from '../../models/actor/actor.model';
-import { converActorToFormData } from '../../utils/convertActorToFormData';
+import { converActorToFormData } from '../../utils/formDataConverters';
 import DisplayErrors from '../../utils/DisplayErrors';
 import { urlActors } from '../../utils/endpoints';
 

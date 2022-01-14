@@ -13,6 +13,7 @@ import { genreDTO } from '../../models/genres/genres.model';
 import { movieTheaterDTO } from '../../models/movieTheater/movieTheater.model';
 import TypeAheadActors from '../actor/TypeAheadActors';
 import { actorMovieDTO } from '../../models/actor/actor.model';
+import MarkdownField from '../formFields/MarkdownField';
 
 export default function MovieForm(props: movieFormProps) {
     const [selectedGenres, setSelectedGenres] = useState(mapToModel(props.selectedGenres));
@@ -32,8 +33,8 @@ export default function MovieForm(props: movieFormProps) {
         <Formik
             initialValues={props.model}
             onSubmit={(values, actions) => {
-                values.genresId = selectedGenres.map(item => item.key);
-                values.movieTheatersId = selectedTheaters.map(item => item.key);
+                values.genresIds = selectedGenres.map(item => item.key);
+                values.movieTheatersIds = selectedTheaters.map(item => item.key);
                 values.actors = selectedActors;
                 props.onSubmit(values, actions)
             }}
@@ -48,6 +49,9 @@ export default function MovieForm(props: movieFormProps) {
                     <CheckboxField displayName='In Theaters' field='inTheaters' />
                     <TextField displayTitle='Trailer' field='trailer' />
                     <DateField displayName='Relealease Date' field='releaseDate' />
+
+                    <MarkdownField displayName='Summary' field='summary' />
+
                     <ImageField displayName='Poster' field='poster' />
                     <MultipleSelectorField
                         displayName='Genres'

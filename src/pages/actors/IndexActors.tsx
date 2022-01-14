@@ -33,11 +33,6 @@ export default function IndexActors() {
                     </tbody>
                 </>}
             </IndexEntity>
-
-            <Link className='my-2 btn btn-primary' to="/actors/create">Create Actor</Link>
-
-            <Link className='my-2 btn btn-secondary' to="/actors/edit">Edit Actor</Link>
-
         </>
     )
 }
