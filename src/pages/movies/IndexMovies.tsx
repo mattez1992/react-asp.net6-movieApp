@@ -6,7 +6,6 @@ export default function IndexMovies() {
         <>
             <h3>Movies</h3>
             <Link className='my-2 btn btn-primary' to="/movies/create">Create Movie</Link>
-            <Link className='my-2 btn btn-secondary' to="/movies/edit">Edit Movie</Link>
         </>
     )
 }

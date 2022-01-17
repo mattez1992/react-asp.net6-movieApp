@@ -5,8 +5,15 @@ import { movieTheaterDTO } from "../movieTheater/movieTheater.model";
 export interface movieDTO {
     id: number;
     title: string;
-    imgUrl: string;
-    actors?: actorMovieDTO[];
+    imgUrl?: string;
+    poster?: string;
+    inTheaters: boolean;
+    trailer: string;
+    summary?: string;
+    releaseDate: Date;
+    genres: genreDTO[];
+    movieTheaters: movieTheaterDTO[];
+    moviesActors: actorMovieDTO[];
 }
 export interface movieCreateDTO {
     title: string;
@@ -22,7 +29,7 @@ export interface movieCreateDTO {
 }
 export interface landinpageDTO {
     inTheaters?: movieDTO[];
-    upComingMovies?: movieDTO[];
+    upComingReleases?: movieDTO[];
 }
 
 export interface movieReadDto {
@@ -36,4 +43,13 @@ export interface movieReadDto {
     genres: genreDTO[];
     movieTheaters: movieTheaterDTO[];
     movieActors: movieActorDto[];
+}
+
+export interface movieEditPageDto {
+    movie: movieDTO;
+    selectedGenres: genreDTO[];
+    nonSelectedGenres: genreDTO[];
+    selectedMovieTheaters: movieTheaterDTO[];
+    nonSelectedMovieTheaters: movieTheaterDTO[];
+    actors: actorMovieDTO[];
 }

@@ -12,6 +12,8 @@ import IndexMovies from "../pages/movies/IndexMovies";
 import CreateMovies from "../pages/movies/CreateMovies";
 import EditMovies from "../pages/movies/EditMovies";
 import RedirectToHome from "./RedirectToHome";
+import FilterMovies from "../models/movies/FilterMovies";
+import MovieDetails from "../pages/movies/MovieDetails";
 
 const routes = [
     { path: "/", component: Home, exact: true },
@@ -31,6 +33,10 @@ const routes = [
     { path: "/movies", component: IndexMovies, exact: true },
     { path: "/movies/create", component: CreateMovies },
     { path: "/movies/edit/:id(\\d+)", component: EditMovies },
+    { path: "/movies/filter", component: FilterMovies },
+    { path: "/movie/:id(\\d+)", component: MovieDetails },
+
+
     { path: "*", component: RedirectToHome }
 ];
 

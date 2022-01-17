@@ -22,6 +22,6 @@ export interface actorMovieDTO {
 }
 
 export interface movieActorDto {
-    actorId?: number;
+    id?: number;
     character?: string;
 }

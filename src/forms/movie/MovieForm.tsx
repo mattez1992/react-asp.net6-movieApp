@@ -25,7 +25,10 @@ export default function MovieForm(props: movieFormProps) {
     const [selectedActors, setSelectedActors] = useState(props.selectedActors);
 
     function mapToModel(items: { id: number, name: string }[]): multipleSelectorModel[] {
+        console.log(props)
+        console.log(items)
         return items.map(item => {
+            console.log(item)
             return { key: item.id, value: item.name }
         })
     }
@@ -52,7 +55,7 @@ export default function MovieForm(props: movieFormProps) {
 
                     <MarkdownField displayName='Summary' field='summary' />
 
-                    <ImageField displayName='Poster' field='poster' />
+                    <ImageField displayName='Poster' field='poster' imageURL={props.model.posterURL} />
                     <MultipleSelectorField
                         displayName='Genres'
                         selected={selectedGenres}
@@ -87,7 +90,7 @@ export default function MovieForm(props: movieFormProps) {
                     />
                     <div className="mt-2 d-flex justify-content-between">
                         <Button disabled={formikProps.isSubmitting} type="submit">Submit</Button>
-                        <Link to="/actors" className='btn btn-secondary'>Cancel</Link>
+                        <Link to="/movies" className='btn btn-secondary'>Cancel</Link>
                     </div>
                 </Form>
             )}

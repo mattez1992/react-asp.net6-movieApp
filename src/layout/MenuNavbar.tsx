@@ -12,6 +12,11 @@ export default function MenuNavbar() {
                             <NavLink to="/genres" className="nav-link">Genres</NavLink>
                         </li>
                         <li className="nav-item">
+                            <NavLink className="nav-link" to="/movies/filter">
+                                Browse Movies
+                            </NavLink>
+                        </li>
+                        <li className="nav-item">
                             <NavLink to="/actors" className="nav-link">Actors</NavLink>
                         </li>
                         <li className="nav-item">

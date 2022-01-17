@@ -1,30 +1,86 @@
-import MovieForm from '../../forms/movie/MovieForm'
+import axios, { AxiosResponse } from 'axios';
+import { useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import MovieForm from '../../forms/movie/MovieForm';
 import { actorMovieDTO } from '../../models/actor/actor.model';
 import { genreDTO } from '../../models/genres/genres.model';
+import { movieCreateDTO, movieEditPageDto } from '../../models/movies/movies.model';
 import { movieTheaterDTO } from '../../models/movieTheater/movieTheater.model';
+import DisplayErrors from '../../utils/DisplayErrors';
+import { urlMovies } from '../../utils/endpoints';
+import { convertMovieToFormData } from '../../utils/formDataConverters';
+import Loading from '../../utils/Loading';
 
 export default function EditMovies() {
-    const selectedGenres: genreDTO[] = [{ id: 1, name: "Action" }];
-    const nonSelectedGenres: genreDTO[] = [{ id: 2, name: "Comedy" }]
+    const { id }: any = useParams();
 
-    const selectedTheaters: movieTheaterDTO[] = [{ id: 1, name: "Nordisk Film" }];
-    const nonSelectedTheaters: movieTheaterDTO[] = [{ id: 2, name: "SF Bio" }]
+    const [movie, setMovie] = useState<movieCreateDTO>()
+    const [movieEditPage, setMovieEditPage] = useState<movieEditPageDto>()
+    const [errors, setErrors] = useState<string[]>([])
+    const history = useHistory();
 
-    const actors: actorMovieDTO[] = [
-        { id: 1, name: "Tom Holland", movieCharacter: "spiderman", picture: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Tom_Holland_by_Gage_Skidmore.jpg/250px-Tom_Holland_by_Gage_Skidmore.jpg" },]
+
+    useEffect(() => {
+        axios.get(`${urlMovies}/getput/${id}`)
+            .then((response: AxiosResponse<movieEditPageDto>) => {
+                const model: movieCreateDTO = {
+                    title: response.data.movie.title,
+                    inTheaters: response.data.movie.inTheaters,
+                    trailer: response.data.movie.trailer,
+                    posterURL: response.data.movie.poster,
+                    summary: response.data.movie.summary,
+                    releaseDate: new Date(response.data.movie.releaseDate),
+                    actors: response.data.movie.moviesActors
+                }
+                console.log("response movie: ")
+                console.log(response.data.movie)
+                console.log("---")
+                console.log("response data: ")
+                console.log(response.data)
+                console.log("---")
+                console.log("model: ")
+                console.log(model)
+                console.log("---")
+                setMovie(model);
+
+                setMovieEditPage(response.data)
+            })
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    async function edit(movieToEdit: movieCreateDTO) {
+        try {
+            const formData = convertMovieToFormData(movieToEdit);
+            await axios({
+                method: "put",
+                url: `${urlMovies}/${id}`,
+                data: formData,
+                headers: { "Content-Type": "multipart/form-data" }
+            });
+            history.push(`/movie/${id}`);
+        } catch (error) {
+            if (error && error.response) {
+                setErrors(error.response.data);
+            }
+        }
+    }
+
     return (
         <div>
             <h3>Edit Movies</h3>
-            <MovieForm model={{ title: "SPider-Man", inTheaters: true, trailer: "url", releaseDate: new Date("2019-01-01T00:00:00") }}
-                onSubmit={values => console.log(values)}
-                nonSelectedGenres={nonSelectedGenres}
-                selectedGenres={selectedGenres}
+            <DisplayErrors errors={errors} />
+            {movie && movieEditPage ?
+                <MovieForm model={movie}
+                    onSubmit={editMovie => edit(editMovie)}
+                    nonSelectedGenres={movieEditPage.nonSelectedGenres}
+                    selectedGenres={movieEditPage.selectedGenres}
 
-                selectedTheaters={selectedTheaters}
-                nonSelectedTheaters={nonSelectedTheaters}
+                    selectedTheaters={movieEditPage.selectedMovieTheaters}
+                    nonSelectedTheaters={movieEditPage.nonSelectedMovieTheaters}
 
-                selectedActors={actors}
-            />
+                    selectedActors={movieEditPage.actors}
+                /> : <Loading />}
         </div>
     )
 }
