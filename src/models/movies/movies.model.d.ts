@@ -14,6 +14,8 @@ export interface movieDTO {
     genres: genreDTO[];
     movieTheaters: movieTheaterDTO[];
     moviesActors: actorMovieDTO[];
+    userRate: number;
+    averageRating: number;
 }
 export interface movieCreateDTO {
     title: string;

@@ -7,6 +7,7 @@ import { urlMovies } from '../../utils/endpoints';
 import Button from '../../utils/Button';
 import customConfirm from '../../utils/customConfirm';
 import AlertContext from '../../utils/AlertContext';
+import Authorized from '../../auth/Authorized';
 
 export default function MovieItem(props: movieDTO) {
     const buildLink = () => `/movie/${props.id}`;
@@ -25,15 +26,17 @@ export default function MovieItem(props: movieDTO) {
             <p>
                 <Link to={buildLink()}>{props.title}</Link>
             </p>
-            <div>
-                <Link className="btn btn-info me-1"
-                    to={`/movies/edit/${props.id}`}
-                >Edit</Link>
-                <Button
-                    onClick={() => customConfirm(() => deleteMovie())}
-                    className="btn btn-danger"
-                >Delete</Button>
-            </div>
+            <Authorized role='admin' authorized={<>
+                <div>
+                    <Link className="btn btn-info me-1"
+                        to={`/movies/edit/${props.id}`}
+                    >Edit</Link>
+                    <Button
+                        onClick={() => customConfirm(() => deleteMovie())}
+                        className="btn btn-danger"
+                    >Delete</Button>
+                </div>
+            </>} />
         </div>
     )
 }

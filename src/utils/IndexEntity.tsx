@@ -53,7 +53,8 @@ export default function IndexEntity<T>(props: IndexProps<T>) {
         <>
             <h3>{props.entityName}</h3>
             <DisplayErrors errors={error} />
-            <Link className='my-2 btn btn-primary' to={props.createURL}>Create {props.entityName}</Link>
+            {props.createURL ? <Link className='my-2 btn btn-primary' to={props.createURL}>Create {props.entityName}</Link> : null}
+
 
             <SelectRecordsPerPage onChange={(amountOfRecords) => {
                 setPage(1);
@@ -72,10 +73,10 @@ export default function IndexEntity<T>(props: IndexProps<T>) {
     )
 }
 interface IndexProps<T> {
-    entityName: string;
+    entityName?: string;
     pagnationURL: string;
     baseURL: string;
-    createURL: string;
+    createURL?: string;
     editURL: string;
     children(entites: T[], buttons: (id: number) => ReactElement): ReactElement;
 }

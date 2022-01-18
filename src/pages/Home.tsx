@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import React, { useEffect, useState } from 'react'
+import Authorized from '../auth/Authorized';
 import { landinpageDTO } from '../models/movies/movies.model';
 import MoviesList from '../models/movies/MoviesList'
 import AlertContext from '../utils/AlertContext';

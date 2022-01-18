@@ -5,9 +5,9 @@ import { useHistory, useLocation } from 'react-router-dom';
 import Button from '../../utils/Button';
 import { urlGenres, urlMovies } from '../../utils/endpoints';
 import Pagination from '../../utils/Pagination';
-import { genreDTO } from '../genres/genres.model'
-import { movieDTO } from './movies.model';
-import MoviesList from './MoviesList';
+import { genreDTO } from '../../models/genres/genres.model'
+import { movieDTO } from '../../models/movies/movies.model';
+import MoviesList from '../../models/movies/MoviesList';
 
 export default function FilterMovies() {
     const initialValues: filterMoviesForm = {

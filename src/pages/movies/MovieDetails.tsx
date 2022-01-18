@@ -4,24 +4,29 @@ import ReactMarkdown from 'react-markdown';
 import { Link, useParams } from 'react-router-dom';
 import { coordinateDTO } from '../../models/map/coordinateDTO.model';
 import { movieDTO } from '../../models/movies/movies.model';
-import { urlMovies } from '../../utils/endpoints';
+import { urlMovies, urlRatings } from '../../utils/endpoints';
 import Map from "../../utils/Map";
 import Loading from '../../utils/Loading';
 import { randomBytes, randomInt } from 'crypto';
+import Ratings from '../../utils/Ratings';
+import Swal from 'sweetalert2';
 
 export default function MovieDetails() {
     const { id }: any = useParams();
     const [movie, setMovie] = useState<movieDTO>();
 
     useEffect(() => {
+
+        loadData();
+    }, [id]);
+    function loadData() {
         axios.get(`${urlMovies}/${id}`)
             .then((response: AxiosResponse<movieDTO>) => {
                 response.data.releaseDate = new Date(response.data.releaseDate);
                 setMovie(response.data);
+                console.log(response.data)
             })
-
-    }, [id]);
-
+    }
     function transformCoordinates(): coordinateDTO[] {
         if (movie?.movieTheaters) {
             const coordinates = movie.movieTheaters.map(theater => {
@@ -43,6 +48,13 @@ export default function MovieDetails() {
         }
         return `https://www.youtube.com/embed/${videoId}`;
     }
+    function handleUserRate(rate: number) {
+        axios.post(urlRatings, { rating: rate, movieId: id })
+            .then(() => {
+                Swal.fire({ icon: "success", title: "Rating recieved" });
+            }).then(() => loadData());
+
+    }
     return (
         <>
             {movie ?
@@ -52,6 +64,7 @@ export default function MovieDetails() {
                         <Link key={genre.id + Math.random()} className="btn btn-primary btn-sm rounded-pill me-1"
                             to={`/movies/filter?genreId=${genre.id}`}>{genre.name}</Link>
                     )} | {movie.releaseDate.toDateString()}
+                    | Your vote: <Ratings maxValue={5} selectedValue={movie.userRate} onChange={handleUserRate} /> Average Rating: {movie.averageRating};
 
                     <div className="d-flex mt-1">
                         <span className="d-inline-block me-1">
